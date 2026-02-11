@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>C1D1 Distance Calculator</title>
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    text-align:center;
+    padding:20px;
+}
+.container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    max-width:400px;
+    margin:auto;
+}
+input{
+    width:90%;
+    padding:8px;
+    margin:5px 0;
+}
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+button:hover{
+    background:#0056b3;
+}
+.result{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>C1D1 Distance Calculator</h2>
+
+<input type="number" id="ac" placeholder="AC">
+<input type="number" id="ad" placeholder="AD">
+<input type="number" id="cc1" placeholder="CC1">
+<input type="number" id="dd1" placeholder="DD1">
+
+<br><br>
+
+<label>
+<input type="radio" name="side" value="same" checked> Same Side
+</label>
+
+<label>
+<input type="radio" name="side" value="opposite"> Opposite Side
+</label>
+
+<br><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="output"></div>
+</div>
+
+<script>
+function calculate(){
+
+let AC = parseFloat(document.getElementById("ac").value);
+let AD = parseFloat(document.getElementById("ad").value);
+let CC1 = parseFloat(document.getElementById("cc1").value);
+let DD1 = parseFloat(document.getElementById("dd1").value);
+
+if(isNaN(AC) || isNaN(AD) || isNaN(CC1) || isNaN(DD1)){
+    document.getElementById("output").innerHTML = "Enter all values";
+    return;
+}
+
+let CD = Math.abs(AD - AC);
+let side = document.querySelector('input[name="side"]:checked').value;
+
+let vertical;
+
+if(side === "same"){
+    vertical = Math.abs(DD1 - CC1);
+}else{
+    vertical = DD1 + CC1;
+}
+
+let C1D1 = Math.sqrt((CD*CD) + (vertical*vertical));
+
+document.getElementById("output").innerHTML = 
+"C1D1 = " + C1D1.toFixed(3);
+}
+</script>
+
+</body>
+</html>
